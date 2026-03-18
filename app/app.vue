@@ -1,3 +1,14 @@
+<script setup lang="ts">
+const { isDark, initTheme } = useTheme()
+onMounted(() => initTheme())
+
+useHead({
+  htmlAttrs: {
+    class: computed(() => isDark.value ? 'dark' : ''),
+  },
+})
+</script>
+
 <template>
   <div>
     <NuxtRouteAnnouncer />
