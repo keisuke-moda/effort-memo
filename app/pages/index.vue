@@ -7,7 +7,7 @@ const { data: goals } = await useAsyncData('goals', () => fetchGoals())
 
 <template>
   <div class="flex flex-col gap-8">
-j    <!-- Page header -->
+    <!-- Page header -->
     <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
       <div>
         <p class="mb-1 text-[11px] font-medium tracking-widest text-gray-400 dark:text-white/30 uppercase">Dashboard</p>
