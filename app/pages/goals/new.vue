@@ -31,43 +31,51 @@ async function submit() {
       ← ダッシュボードに戻る
     </NuxtLink>
 
-    <h1 class="m-0 text-2xl font-extrabold text-[#1a1a2e]">目標を追加</h1>
+    <h1 class="m-0 text-2xl font-extrabold text-[#1a1a2e] text-balance">目標を追加</h1>
 
     <form class="flex flex-col gap-5 p-6 bg-white border border-gray-200 rounded-xl" @submit.prevent="submit">
       <div class="flex flex-col gap-1.5">
-        <label class="text-sm font-semibold text-gray-700">タイトル <span class="text-[#e94560]">*</span></label>
+        <label for="title" class="text-sm font-semibold text-gray-700">タイトル <span class="text-[#e94560]">*</span></label>
         <input
+          id="title"
           v-model="form.title"
           type="text"
+          name="title"
           placeholder="例：フルスタックエンジニアになる"
           class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20"
         />
       </div>
 
       <div class="flex flex-col gap-1.5">
-        <label class="text-sm font-semibold text-gray-700">説明</label>
+        <label for="description" class="text-sm font-semibold text-gray-700">説明</label>
         <textarea
+          id="description"
           v-model="form.description"
+          name="description"
           rows="3"
-          placeholder="目標の詳細を記入..."
+          placeholder="目標の詳細を記入…"
           class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20 resize-y"
         />
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div class="flex flex-col gap-1.5">
-          <label class="text-sm font-semibold text-gray-700">期限</label>
+          <label for="deadline" class="text-sm font-semibold text-gray-700">期限</label>
           <input
+            id="deadline"
             v-model="form.deadline"
             type="date"
+            name="deadline"
             class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20"
           />
         </div>
         <div class="flex flex-col gap-1.5">
-          <label class="text-sm font-semibold text-gray-700">達成ご褒美</label>
+          <label for="reward" class="text-sm font-semibold text-gray-700">達成ご褒美</label>
           <input
+            id="reward"
             v-model="form.reward"
             type="text"
+            name="reward"
             placeholder="例：新しいMacBook Proを買う！"
             class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20"
           />
@@ -77,7 +85,7 @@ async function submit() {
       <button
         type="submit"
         :disabled="!form.title.trim()"
-        class="mt-2 px-6 py-3 bg-[#e94560] text-white font-semibold rounded-lg cursor-pointer transition-all hover:bg-[#d63851] disabled:opacity-40 disabled:cursor-not-allowed"
+        class="mt-2 px-6 py-3 bg-[#e94560] text-white font-semibold rounded-lg cursor-pointer transition-colors hover:bg-[#d63851] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560] focus-visible:ring-offset-2"
       >
         目標を追加する
       </button>

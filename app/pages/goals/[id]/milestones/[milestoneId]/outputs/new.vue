@@ -113,7 +113,7 @@ async function submit() {
       ← {{ milestone?.title ?? 'マイルストーン' }}に戻る
     </NuxtLink>
 
-    <h1 class="m-0 text-2xl font-extrabold text-[#1a1a2e]">アウトプットを追加</h1>
+    <h1 class="m-0 text-2xl font-extrabold text-[#1a1a2e] text-balance">アウトプットを追加</h1>
 
     <form class="flex flex-col gap-5 p-6 bg-white border border-gray-200 rounded-xl" @submit.prevent="submit">
       <!-- Type Select -->
@@ -124,7 +124,7 @@ async function submit() {
             v-for="opt in typeOptions"
             :key="opt.value"
             type="button"
-            class="flex-1 py-2.5 px-3 text-sm border rounded-lg cursor-pointer transition-all text-center"
+            class="flex-1 py-2.5 px-3 text-sm border rounded-lg cursor-pointer transition-colors text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560]"
             :class="form.type === opt.value
               ? 'bg-[#e94560]/10 border-[#e94560] text-[#e94560] font-semibold'
               : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'"
@@ -136,20 +136,24 @@ async function submit() {
       </div>
 
       <div class="flex flex-col gap-1.5">
-        <label class="text-sm font-semibold text-gray-700">タイトル <span class="text-[#e94560]">*</span></label>
+        <label for="title" class="text-sm font-semibold text-gray-700">タイトル <span class="text-[#e94560]">*</span></label>
         <input
+          id="title"
           v-model="form.title"
           type="text"
+          name="title"
           :placeholder="form.type === 'memo' ? '例：Vue.jsのリアクティビティを理解した' : '例：完成したデザインファイル'"
           class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20"
         />
       </div>
 
       <div class="flex flex-col gap-1.5">
-        <label class="text-sm font-semibold text-gray-700">日付</label>
+        <label for="activity-date" class="text-sm font-semibold text-gray-700">日付</label>
         <input
+          id="activity-date"
           v-model="form.activityDate"
           type="date"
+          name="activity-date"
           class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20"
         />
       </div>
@@ -157,21 +161,25 @@ async function submit() {
       <!-- メモタイプ -->
       <template v-if="form.type === 'memo'">
         <div class="flex flex-col gap-1.5">
-          <label class="text-sm font-semibold text-gray-700">学んだこと・頑張ったこと</label>
+          <label for="description" class="text-sm font-semibold text-gray-700">学んだこと・頑張ったこと</label>
           <textarea
+            id="description"
             v-model="form.description"
+            name="description"
             rows="6"
-            placeholder="何を学んだか、どれだけ頑張ったかを書こう..."
+            placeholder="何を学んだか、どれだけ頑張ったかを書こう…"
             class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20 resize-y"
           />
         </div>
 
         <div class="flex flex-col gap-1.5">
-          <label class="text-sm font-semibold text-gray-700">URL（任意）</label>
+          <label for="url" class="text-sm font-semibold text-gray-700">URL（任意）</label>
           <input
+            id="url"
             v-model="form.url"
             type="url"
-            placeholder="https://example.com/..."
+            name="url"
+            placeholder="https://example.com/…"
             class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20"
           />
         </div>
@@ -180,16 +188,17 @@ async function submit() {
       <!-- ファイルタイプ -->
       <template v-if="form.type === 'file'">
         <div class="flex flex-col gap-1.5">
-          <label class="text-sm font-semibold text-gray-700">ファイル <span class="text-[#e94560]">*</span></label>
+          <label for="file" class="text-sm font-semibold text-gray-700">ファイル <span class="text-[#e94560]">*</span></label>
 
           <label
             v-if="!selectedFile"
-            class="flex flex-col items-center gap-3 py-8 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer transition-all hover:border-[#e94560] hover:bg-[#e94560]/5"
+            class="flex flex-col items-center gap-3 py-8 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer transition-colors hover:border-[#e94560] hover:bg-[#e94560]/5"
           >
             <span class="text-4xl">📎</span>
             <span class="text-sm text-gray-500">クリックしてファイルを選択</span>
             <span class="text-xs text-gray-400">画像・動画・音声・PDFなど</span>
             <input
+              id="file"
               type="file"
               class="hidden"
               @change="onFileSelect"
@@ -236,11 +245,13 @@ async function submit() {
         </div>
 
         <div class="flex flex-col gap-1.5">
-          <label class="text-sm font-semibold text-gray-700">メモ</label>
+          <label for="file-description" class="text-sm font-semibold text-gray-700">メモ</label>
           <textarea
+            id="file-description"
             v-model="form.description"
+            name="file-description"
             rows="3"
-            placeholder="補足メモなど..."
+            placeholder="補足メモなど…"
             class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20 resize-y"
           />
         </div>
@@ -249,9 +260,9 @@ async function submit() {
       <button
         type="submit"
         :disabled="!canSubmit || submitting"
-        class="mt-2 px-6 py-3 bg-[#e94560] text-white font-semibold rounded-lg cursor-pointer transition-all hover:bg-[#d63851] disabled:opacity-40 disabled:cursor-not-allowed"
+        class="mt-2 px-6 py-3 bg-[#e94560] text-white font-semibold rounded-lg cursor-pointer transition-colors hover:bg-[#d63851] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560] focus-visible:ring-offset-2"
       >
-        {{ submitting ? 'アップロード中...' : 'アウトプットを追加する' }}
+        {{ submitting ? 'アップロード中…' : 'アウトプットを追加する' }}
       </button>
     </form>
   </div>

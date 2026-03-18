@@ -25,6 +25,11 @@ function getTypeDisplay(type: string): { icon: string; label: string; color: str
   }
 }
 
+function formatDate(dateStr: string | null | undefined): string {
+  if (!dateStr) return ''
+  return new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(dateStr))
+}
+
 function getMediaType(url: string): 'image' | 'video' | 'audio' | null {
   const ext = url.split('.').pop()?.toLowerCase().split('?')[0] ?? ''
   if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(ext)) return 'image'
@@ -54,11 +59,11 @@ function getMediaType(url: string): 'image' | 'video' | 'audio' | null {
           <span class="text-xs font-semibold px-2 py-1 rounded-md" :class="getTypeDisplay(output.type).color">
             {{ getTypeDisplay(output.type).icon }} {{ getTypeDisplay(output.type).label }}
           </span>
-          <span class="text-sm text-gray-400">{{ output.activity_date }}</span>
+          <span class="text-sm text-gray-400">{{ formatDate(output.activity_date) }}</span>
         </div>
         <NuxtLink
           :to="`/goals/${goalId}/milestones/${milestoneId}/outputs/${outputId}/edit`"
-          class="px-3.5 py-1.5 text-[13px] border border-gray-300 bg-white rounded-md no-underline text-gray-500 transition-all hover:bg-gray-100 hover:border-gray-400"
+          class="px-3.5 py-1.5 text-[13px] border border-gray-300 bg-white rounded-md no-underline text-gray-500 transition-colors hover:bg-gray-100 hover:border-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560]"
         >
           ✏️ 編集
         </NuxtLink>

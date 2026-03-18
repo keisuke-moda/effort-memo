@@ -18,7 +18,7 @@ const barColor = computed(() => {
   <div class="flex items-center gap-2">
     <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
       <div
-        class="h-full rounded-full transition-all duration-300"
+        class="h-full rounded-full transition-[width] duration-300"
         :class="barColor"
         :style="{ width: `${progress ?? 0}%` }"
       />

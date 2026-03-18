@@ -18,6 +18,11 @@ async function handleToggleStatus() {
   await toggleMilestoneStatus(milestone.value.id)
   await refreshMilestone()
 }
+
+function formatDate(dateStr: string | null | undefined): string {
+  if (!dateStr) return ''
+  return new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(dateStr))
+}
 </script>
 
 <template>
@@ -38,12 +43,12 @@ async function handleToggleStatus() {
         <div class="flex items-center gap-2">
           <NuxtLink
             :to="`/goals/${goalId}/milestones/${milestoneId}/edit`"
-            class="px-3.5 py-1.5 text-[13px] border border-gray-300 bg-white rounded-md no-underline text-gray-500 transition-all hover:bg-gray-100 hover:border-gray-400"
+            class="px-3.5 py-1.5 text-[13px] border border-gray-300 bg-white rounded-md no-underline text-gray-500 transition-colors hover:bg-gray-100 hover:border-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560]"
           >
             ✏️ 編集
           </NuxtLink>
           <button
-            class="px-3.5 py-1.5 text-[13px] border border-gray-300 bg-white rounded-md cursor-pointer text-gray-500 transition-all hover:bg-gray-100 hover:border-gray-400"
+            class="px-3.5 py-1.5 text-[13px] border border-gray-300 bg-white rounded-md cursor-pointer text-gray-500 transition-colors hover:bg-gray-100 hover:border-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560]"
             @click="handleToggleStatus"
           >
             ステータスを変更
@@ -51,17 +56,17 @@ async function handleToggleStatus() {
         </div>
       </div>
 
-      <h1 class="m-0 text-2xl max-md:text-xl font-extrabold text-[#1a1a2e]">{{ milestone.title }}</h1>
+      <h1 class="m-0 text-2xl max-md:text-xl font-extrabold text-[#1a1a2e] text-balance">{{ milestone.title }}</h1>
       <p class="m-0 text-[15px] text-gray-600 leading-relaxed">{{ milestone.description }}</p>
 
       <div class="flex gap-6 flex-wrap">
         <div class="flex flex-col gap-0.5">
           <span class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">期限</span>
-          <span class="text-sm text-gray-700">📅 {{ milestone.deadline }}</span>
+          <span class="text-sm text-gray-700">📅 {{ formatDate(milestone.deadline) }}</span>
         </div>
         <div class="flex flex-col gap-0.5">
           <span class="text-[11px] uppercase tracking-wider text-gray-400 font-semibold">作成日</span>
-          <span class="text-sm text-gray-700">{{ milestone.created_at.slice(0, 10) }}</span>
+          <span class="text-sm text-gray-700">{{ formatDate(milestone.created_at) }}</span>
         </div>
       </div>
 
@@ -77,7 +82,7 @@ async function handleToggleStatus() {
         <h3 class="m-0 text-lg font-bold text-[#1a1a2e]">アウトプット ({{ outputs?.length ?? 0 }})</h3>
         <NuxtLink
           :to="`/goals/${goalId}/milestones/${milestoneId}/outputs/new`"
-          class="px-3.5 py-1.5 text-[13px] bg-[#e94560] text-white font-semibold rounded-md no-underline transition-all hover:bg-[#d63851]"
+          class="px-3.5 py-1.5 text-[13px] bg-[#e94560] text-white font-semibold rounded-md no-underline transition-colors hover:bg-[#d63851] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560] focus-visible:ring-offset-2"
         >
           + 追加
         </NuxtLink>
@@ -97,7 +102,7 @@ async function handleToggleStatus() {
         <p class="text-sm">まだアウトプットがありません</p>
         <NuxtLink
           :to="`/goals/${goalId}/milestones/${milestoneId}/outputs/new`"
-          class="inline-block mt-3 px-4 py-2 bg-[#e94560] text-white text-sm font-semibold rounded-lg no-underline transition-all hover:bg-[#d63851]"
+          class="inline-block mt-3 px-4 py-2 bg-[#e94560] text-white text-sm font-semibold rounded-lg no-underline transition-colors hover:bg-[#d63851] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560] focus-visible:ring-offset-2"
         >
           最初のアウトプットを追加する
         </NuxtLink>

@@ -8,7 +8,7 @@
       <nav>
         <NuxtLink
           to="/"
-          class="text-gray-400 no-underline text-sm px-3 py-1.5 rounded-md transition-all hover:text-white hover:bg-[#e94560]/20"
+          class="text-gray-400 no-underline text-sm px-3 py-1.5 rounded-md transition-colors hover:text-white hover:bg-[#e94560]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
         >
           ダッシュボード
         </NuxtLink>
