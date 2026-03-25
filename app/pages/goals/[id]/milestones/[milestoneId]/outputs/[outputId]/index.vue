@@ -11,17 +11,17 @@ const { data: milestone } = await useAsyncData(`milestone-${milestoneId}`, () =>
 const { data: output } = await useAsyncData(`output-${outputId}`, () => fetchOutputById(outputId))
 
 useHead({
-  title: computed(() => output.value ? `${output.value.title} | effort-memo` : 'effort-memo'),
+  title: computed(() => output.value ? `${output.value.title} | Momentum` : 'Momentum'),
 })
 
 function getTypeDisplay(type: string): { icon: string; label: string; color: string } {
   switch (type) {
-    case 'memo': return { icon: '📝', label: 'メモ', color: 'bg-emerald-100 text-emerald-700' }
-    case 'file': return { icon: '📎', label: 'ファイル', color: 'bg-orange-100 text-orange-700' }
-    case 'url': return { icon: '🔗', label: 'リンク', color: 'bg-blue-100 text-blue-700' }
-    case 'audio': return { icon: '🎵', label: '音声', color: 'bg-purple-100 text-purple-700' }
-    case 'video': return { icon: '🎬', label: '動画', color: 'bg-amber-100 text-amber-700' }
-    default: return { icon: '📄', label: type, color: 'bg-gray-100 text-gray-700' }
+    case 'memo': return { icon: '📝', label: 'メモ', color: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-400' }
+    case 'file': return { icon: '📎', label: 'ファイル', color: 'bg-orange-100 text-orange-700 dark:bg-orange-500/15 dark:text-orange-400' }
+    case 'url': return { icon: '🔗', label: 'リンク', color: 'bg-blue-100 text-blue-700 dark:bg-blue-500/15 dark:text-blue-400' }
+    case 'audio': return { icon: '🎵', label: '音声', color: 'bg-purple-100 text-purple-700 dark:bg-purple-500/15 dark:text-purple-400' }
+    case 'video': return { icon: '🎬', label: '動画', color: 'bg-amber-100 text-amber-700 dark:bg-amber-500/15 dark:text-amber-400' }
+    default: return { icon: '📄', label: type, color: 'bg-gray-100 text-gray-700 dark:bg-white/10 dark:text-white/60' }
   }
 }
 
@@ -42,66 +42,66 @@ function getMediaType(url: string): 'image' | 'video' | 'audio' | null {
 <template>
   <div v-if="output && milestone && goal" class="flex flex-col gap-5 max-w-3xl mx-auto">
     <!-- Breadcrumb -->
-    <div class="flex items-center gap-1.5 text-sm text-gray-400 flex-wrap">
-      <NuxtLink to="/" class="no-underline text-gray-400 hover:text-[#e94560]">ダッシュボード</NuxtLink>
+    <div class="flex items-center gap-1.5 text-sm text-gray-400 dark:text-white/35 flex-wrap">
+      <NuxtLink to="/" class="no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors">ダッシュボード</NuxtLink>
       <span>/</span>
-      <NuxtLink :to="`/goals/${goalId}`" class="no-underline text-gray-400 hover:text-[#e94560]">{{ goal.title }}</NuxtLink>
+      <NuxtLink :to="`/goals/${goalId}`" class="no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors">{{ goal.title }}</NuxtLink>
       <span>/</span>
-      <NuxtLink :to="`/goals/${goalId}/milestones/${milestoneId}`" class="no-underline text-gray-400 hover:text-[#e94560]">{{ milestone.title }}</NuxtLink>
+      <NuxtLink :to="`/goals/${goalId}/milestones/${milestoneId}`" class="no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors">{{ milestone.title }}</NuxtLink>
       <span>/</span>
-      <span class="text-gray-600">{{ output.title }}</span>
+      <span class="text-gray-600 dark:text-white/60">{{ output.title }}</span>
     </div>
 
     <!-- Header -->
-    <div class="flex flex-col gap-4 p-6 bg-white border border-gray-200 rounded-xl">
+    <div class="flex flex-col gap-4 p-6 bg-white dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/[0.08] rounded-2xl">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-2">
-          <span class="text-xs font-semibold px-2 py-1 rounded-md" :class="getTypeDisplay(output.type).color">
+          <span class="text-xs font-semibold px-2 py-1 rounded-lg" :class="getTypeDisplay(output.type).color">
             {{ getTypeDisplay(output.type).icon }} {{ getTypeDisplay(output.type).label }}
           </span>
-          <span class="text-sm text-gray-400">{{ formatDate(output.activity_date) }}</span>
+          <span class="text-sm text-gray-400 dark:text-white/35">{{ formatDate(output.activity_date) }}</span>
         </div>
         <NuxtLink
           :to="`/goals/${goalId}/milestones/${milestoneId}/outputs/${outputId}/edit`"
-          class="px-3.5 py-1.5 text-[13px] border border-gray-300 bg-white rounded-md no-underline text-gray-500 transition-colors hover:bg-gray-100 hover:border-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560]"
+          class="px-3.5 py-1.5 text-[13px] border border-gray-200 dark:border-white/[0.12] bg-white dark:bg-white/[0.06] rounded-lg no-underline text-gray-500 dark:text-white/50 transition-colors hover:bg-gray-50 hover:border-gray-300 dark:hover:bg-white/10 dark:hover:border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
         >
-          ✏️ 編集
+          編集
         </NuxtLink>
       </div>
 
-      <h1 class="m-0 text-2xl max-md:text-xl font-extrabold text-[#1a1a2e]">{{ output.title }}</h1>
+      <h1 class="m-0 text-2xl max-md:text-xl font-extrabold text-gray-900 dark:text-white/90">{{ output.title }}</h1>
 
-      <p v-if="output.description" class="m-0 text-[15px] text-gray-600 leading-relaxed whitespace-pre-wrap">{{ output.description }}</p>
+      <p v-if="output.description" class="m-0 text-[15px] text-gray-600 dark:text-white/50 leading-relaxed whitespace-pre-wrap">{{ output.description }}</p>
     </div>
 
     <!-- URL (memo/url type with link) -->
-    <div v-if="output.url && (output.type === 'memo' || output.type === 'url')" class="p-6 bg-white border border-gray-200 rounded-xl">
-      <h3 class="m-0 mb-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">リンク</h3>
+    <div v-if="output.url && (output.type === 'memo' || output.type === 'url')" class="p-6 bg-white dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/[0.08] rounded-2xl">
+      <h3 class="m-0 mb-4 text-sm font-semibold text-gray-400 dark:text-white/35 uppercase tracking-wider">リンク</h3>
       <a
         :href="output.url"
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 px-4 py-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-600 text-sm break-all hover:bg-blue-100 transition-colors"
+        class="inline-flex items-center gap-2 px-4 py-3 bg-blue-50 dark:bg-blue-500/10 border border-blue-200 dark:border-blue-500/20 rounded-xl text-blue-600 dark:text-blue-400 text-sm break-all hover:bg-blue-100 dark:hover:bg-blue-500/15 transition-colors"
       >
         🔗 {{ output.url }}
       </a>
     </div>
 
     <!-- File content (file/audio/video type) -->
-    <div v-if="output.url && (output.type === 'file' || output.type === 'audio' || output.type === 'video')" class="p-6 bg-white border border-gray-200 rounded-xl">
-      <h3 class="m-0 mb-4 text-sm font-semibold text-gray-400 uppercase tracking-wider">ファイル</h3>
+    <div v-if="output.url && (output.type === 'file' || output.type === 'audio' || output.type === 'video')" class="p-6 bg-white dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/[0.08] rounded-2xl">
+      <h3 class="m-0 mb-4 text-sm font-semibold text-gray-400 dark:text-white/35 uppercase tracking-wider">ファイル</h3>
       <div class="flex flex-col gap-3">
         <img
           v-if="getMediaType(output.url) === 'image'"
           :src="output.url"
           :alt="output.title"
-          class="w-full max-h-[400px] object-contain rounded-lg bg-gray-50"
+          class="w-full max-h-[400px] object-contain rounded-xl bg-gray-50 dark:bg-white/[0.04]"
         />
         <video
           v-else-if="getMediaType(output.url) === 'video' || output.type === 'video'"
           controls
           :src="output.url"
-          class="w-full max-h-[400px] rounded-lg bg-black"
+          class="w-full max-h-[400px] rounded-xl bg-black"
         />
         <audio
           v-else-if="getMediaType(output.url) === 'audio' || output.type === 'audio'"
@@ -114,7 +114,7 @@ function getMediaType(url: string): 'image' | 'video' | 'audio' | null {
           :href="output.url"
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-3 bg-orange-50 border border-orange-200 rounded-lg text-orange-700 text-sm hover:bg-orange-100 transition-colors"
+          class="inline-flex items-center gap-2 px-4 py-3 bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20 rounded-xl text-orange-700 dark:text-orange-400 text-sm hover:bg-orange-100 dark:hover:bg-orange-500/15 transition-colors"
         >
           📎 {{ output.file_name ?? 'ファイルを開く' }}
         </a>
@@ -122,8 +122,8 @@ function getMediaType(url: string): 'image' | 'video' | 'audio' | null {
     </div>
   </div>
 
-  <div v-else class="text-center py-16 text-gray-500">
+  <div v-else class="text-center py-16 text-gray-500 dark:text-white/40">
     <h2>アウトプットが見つかりません</h2>
-    <NuxtLink to="/" class="text-[#e94560]">ダッシュボードに戻る</NuxtLink>
+    <NuxtLink to="/" class="text-indigo-500">ダッシュボードに戻る</NuxtLink>
   </div>
 </template>

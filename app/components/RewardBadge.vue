@@ -7,7 +7,7 @@ defineProps<{
 <template>
   <span
     v-if="reward"
-    class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-orange-50 dark:bg-orange-500/10 border border-orange-200 dark:border-orange-500/20 rounded-lg text-[11px] text-orange-600 dark:text-orange-400 font-medium"
+    class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-[11px] text-amber-600 dark:text-amber-400 font-medium"
   >
     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="20 12 20 22 4 22 4 12"/>

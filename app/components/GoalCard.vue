@@ -14,7 +14,7 @@ function formatDate(dateStr: string | null | undefined): string {
 <template>
   <NuxtLink
     :to="`/goals/${goal.id}`"
-    class="flex flex-col gap-3.5 p-5 bg-white dark:bg-white/[0.04] border border-gray-200 dark:border-white/[0.08] rounded-2xl no-underline text-inherit transition-all duration-200 cursor-pointer hover:border-[#e94560]/40 hover:shadow-[0_0_28px_rgba(233,69,96,0.08)] dark:hover:bg-white/[0.07] dark:hover:border-[#e94560]/30 dark:hover:shadow-[0_0_28px_rgba(233,69,96,0.1)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560]/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0b0b12]"
+    class="flex flex-col gap-3.5 p-5 bg-white dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/[0.08] rounded-2xl no-underline text-inherit transition-all duration-200 cursor-pointer hover:border-indigo-300 hover:shadow-lg hover:shadow-indigo-500/[0.08] dark:hover:bg-white/[0.06] dark:hover:border-indigo-500/30 dark:hover:shadow-[0_0_28px_rgba(99,102,241,0.08)] hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-[#0b0b12]"
   >
     <div class="flex items-center justify-between">
       <StatusBadge :status="goal.status" />

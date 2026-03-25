@@ -11,7 +11,7 @@ const { data: milestone } = await useAsyncData(`milestone-out-new-${milestoneId}
 
 if (!milestone.value) router.push(`/goals/${goalId}`)
 
-useHead({ title: 'アウトプットを追加 | effort-memo' })
+useHead({ title: 'アウトプットを追加 | Momentum' })
 
 const today = new Date().toISOString().split('T')[0]
 
@@ -108,26 +108,26 @@ async function submit() {
   <div class="flex flex-col gap-5 max-w-2xl mx-auto">
     <NuxtLink
       :to="`/goals/${goalId}/milestones/${milestoneId}`"
-      class="text-gray-500 no-underline text-sm transition-colors hover:text-[#e94560]"
+      class="text-gray-500 dark:text-white/40 no-underline text-sm transition-colors hover:text-indigo-500"
     >
       ← {{ milestone?.title ?? 'マイルストーン' }}に戻る
     </NuxtLink>
 
-    <h1 class="m-0 text-2xl font-extrabold text-[#1a1a2e] text-balance">アウトプットを追加</h1>
+    <h1 class="m-0 text-2xl font-extrabold text-gray-900 dark:text-white/90 text-balance">アウトプットを追加</h1>
 
-    <form class="flex flex-col gap-5 p-6 bg-white border border-gray-200 rounded-xl" @submit.prevent="submit">
+    <form class="flex flex-col gap-5 p-6 bg-white dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/[0.08] rounded-2xl" @submit.prevent="submit">
       <!-- Type Select -->
       <div class="flex flex-col gap-1.5">
-        <label class="text-sm font-semibold text-gray-700">種類 <span class="text-[#e94560]">*</span></label>
+        <label class="text-sm font-semibold text-gray-700 dark:text-white/70">種類 <span class="text-indigo-500">*</span></label>
         <div class="flex gap-2">
           <button
             v-for="opt in typeOptions"
             :key="opt.value"
             type="button"
-            class="flex-1 py-2.5 px-3 text-sm border rounded-lg cursor-pointer transition-colors text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560]"
+            class="flex-1 py-2.5 px-3 text-sm border rounded-xl cursor-pointer transition-all text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
             :class="form.type === opt.value
-              ? 'bg-[#e94560]/10 border-[#e94560] text-[#e94560] font-semibold'
-              : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'"
+              ? 'bg-indigo-50 dark:bg-indigo-500/15 border-indigo-400 dark:border-indigo-500/40 text-indigo-600 dark:text-indigo-400 font-semibold'
+              : 'bg-white dark:bg-white/[0.06] border-gray-300 dark:border-white/[0.12] text-gray-500 dark:text-white/50 hover:bg-gray-50 dark:hover:bg-white/10'"
             @click="onTypeChange(opt.value)"
           >
             {{ opt.icon }} {{ opt.label }}
@@ -136,51 +136,51 @@ async function submit() {
       </div>
 
       <div class="flex flex-col gap-1.5">
-        <label for="title" class="text-sm font-semibold text-gray-700">タイトル <span class="text-[#e94560]">*</span></label>
+        <label for="title" class="text-sm font-semibold text-gray-700 dark:text-white/70">タイトル <span class="text-indigo-500">*</span></label>
         <input
           id="title"
           v-model="form.title"
           type="text"
           name="title"
           :placeholder="form.type === 'memo' ? '例：Vue.jsのリアクティビティを理解した' : '例：完成したデザインファイル'"
-          class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20"
+          class="px-4 py-2.5 border border-gray-300 dark:border-white/[0.12] bg-white dark:bg-white/[0.06] text-gray-900 dark:text-white/90 rounded-xl text-sm outline-none transition-all focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 placeholder:text-gray-400 dark:placeholder:text-white/25"
         />
       </div>
 
       <div class="flex flex-col gap-1.5">
-        <label for="activity-date" class="text-sm font-semibold text-gray-700">日付</label>
+        <label for="activity-date" class="text-sm font-semibold text-gray-700 dark:text-white/70">日付</label>
         <input
           id="activity-date"
           v-model="form.activityDate"
           type="date"
           name="activity-date"
-          class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20"
+          class="px-4 py-2.5 border border-gray-300 dark:border-white/[0.12] bg-white dark:bg-white/[0.06] text-gray-900 dark:text-white/90 rounded-xl text-sm outline-none transition-all focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20"
         />
       </div>
 
       <!-- メモタイプ -->
       <template v-if="form.type === 'memo'">
         <div class="flex flex-col gap-1.5">
-          <label for="description" class="text-sm font-semibold text-gray-700">学んだこと・頑張ったこと</label>
+          <label for="description" class="text-sm font-semibold text-gray-700 dark:text-white/70">学んだこと・頑張ったこと</label>
           <textarea
             id="description"
             v-model="form.description"
             name="description"
             rows="6"
             placeholder="何を学んだか、どれだけ頑張ったかを書こう…"
-            class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20 resize-y"
+            class="px-4 py-2.5 border border-gray-300 dark:border-white/[0.12] bg-white dark:bg-white/[0.06] text-gray-900 dark:text-white/90 rounded-xl text-sm outline-none transition-all focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 resize-y placeholder:text-gray-400 dark:placeholder:text-white/25"
           />
         </div>
 
         <div class="flex flex-col gap-1.5">
-          <label for="url" class="text-sm font-semibold text-gray-700">URL（任意）</label>
+          <label for="url" class="text-sm font-semibold text-gray-700 dark:text-white/70">URL（任意）</label>
           <input
             id="url"
             v-model="form.url"
             type="url"
             name="url"
             placeholder="https://example.com/…"
-            class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20"
+            class="px-4 py-2.5 border border-gray-300 dark:border-white/[0.12] bg-white dark:bg-white/[0.06] text-gray-900 dark:text-white/90 rounded-xl text-sm outline-none transition-all focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 placeholder:text-gray-400 dark:placeholder:text-white/25"
           />
         </div>
       </template>
@@ -188,15 +188,15 @@ async function submit() {
       <!-- ファイルタイプ -->
       <template v-if="form.type === 'file'">
         <div class="flex flex-col gap-1.5">
-          <label for="file" class="text-sm font-semibold text-gray-700">ファイル <span class="text-[#e94560]">*</span></label>
+          <label for="file" class="text-sm font-semibold text-gray-700 dark:text-white/70">ファイル <span class="text-indigo-500">*</span></label>
 
           <label
             v-if="!selectedFile"
-            class="flex flex-col items-center gap-3 py-8 border-2 border-dashed border-gray-300 rounded-xl cursor-pointer transition-colors hover:border-[#e94560] hover:bg-[#e94560]/5"
+            class="flex flex-col items-center gap-3 py-8 border-2 border-dashed border-gray-300 dark:border-white/[0.15] rounded-2xl cursor-pointer transition-all hover:border-indigo-400 hover:bg-indigo-50/50 dark:hover:bg-indigo-500/5"
           >
             <span class="text-4xl">📎</span>
-            <span class="text-sm text-gray-500">クリックしてファイルを選択</span>
-            <span class="text-xs text-gray-400">画像・動画・音声・PDFなど</span>
+            <span class="text-sm text-gray-500 dark:text-white/40">クリックしてファイルを選択</span>
+            <span class="text-xs text-gray-400 dark:text-white/25">画像・動画・音声・PDFなど</span>
             <input
               id="file"
               type="file"
@@ -205,18 +205,18 @@ async function submit() {
             />
           </label>
 
-          <div v-else class="flex flex-col gap-3 p-4 bg-gray-50 border border-gray-200 rounded-xl">
+          <div v-else class="flex flex-col gap-3 p-4 bg-gray-50 dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/[0.08] rounded-xl">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3 min-w-0">
                 <span class="text-2xl">{{ getFileIcon(selectedFile.name) }}</span>
                 <div class="min-w-0">
-                  <p class="m-0 text-sm font-medium truncate">{{ selectedFile.name }}</p>
-                  <p class="m-0 text-xs text-gray-400">{{ formatFileSize(selectedFile.size) }}</p>
+                  <p class="m-0 text-sm font-medium text-gray-900 dark:text-white/90 truncate">{{ selectedFile.name }}</p>
+                  <p class="m-0 text-xs text-gray-400 dark:text-white/35">{{ formatFileSize(selectedFile.size) }}</p>
                 </div>
               </div>
               <button
                 type="button"
-                class="shrink-0 px-3 py-1 text-xs text-gray-500 border border-gray-300 rounded-md cursor-pointer hover:bg-gray-100"
+                class="shrink-0 px-3 py-1 text-xs text-gray-500 dark:text-white/50 border border-gray-300 dark:border-white/[0.12] rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-white/10"
                 @click="clearFile"
               >
                 変更
@@ -245,14 +245,14 @@ async function submit() {
         </div>
 
         <div class="flex flex-col gap-1.5">
-          <label for="file-description" class="text-sm font-semibold text-gray-700">メモ</label>
+          <label for="file-description" class="text-sm font-semibold text-gray-700 dark:text-white/70">メモ</label>
           <textarea
             id="file-description"
             v-model="form.description"
             name="file-description"
             rows="3"
             placeholder="補足メモなど…"
-            class="px-4 py-2.5 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-[#e94560] focus:ring-2 focus:ring-[#e94560]/20 resize-y"
+            class="px-4 py-2.5 border border-gray-300 dark:border-white/[0.12] bg-white dark:bg-white/[0.06] text-gray-900 dark:text-white/90 rounded-xl text-sm outline-none transition-all focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/20 resize-y placeholder:text-gray-400 dark:placeholder:text-white/25"
           />
         </div>
       </template>
@@ -260,7 +260,7 @@ async function submit() {
       <button
         type="submit"
         :disabled="!canSubmit || submitting"
-        class="mt-2 px-6 py-3 bg-[#e94560] text-white font-semibold rounded-lg cursor-pointer transition-colors hover:bg-[#d63851] disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560] focus-visible:ring-offset-2"
+        class="mt-2 px-6 py-3 bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-semibold rounded-xl cursor-pointer transition-all hover:shadow-lg hover:shadow-indigo-500/25 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#0b0b12]"
       >
         {{ submitting ? 'アップロード中…' : 'アウトプットを追加する' }}
       </button>

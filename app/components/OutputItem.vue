@@ -27,22 +27,22 @@ function getTypeDisplay(type: string): { icon: string; label: string; color: str
 <template>
   <NuxtLink
     :to="`/goals/${goalId}/milestones/${milestoneId}/outputs/${output.id}`"
-    class="flex items-center gap-4 p-4 bg-white border border-gray-200 rounded-xl no-underline text-inherit transition-[border-color,box-shadow,transform] hover:border-[#e94560] hover:shadow-md hover:-translate-y-0.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e94560] focus-visible:ring-offset-2"
+    class="flex items-center gap-4 p-4 bg-white dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/[0.08] rounded-xl no-underline text-inherit transition-all duration-200 hover:border-indigo-300 hover:shadow-md hover:-translate-y-0.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#0b0b12]"
   >
     <div class="shrink-0 w-11 h-11 rounded-xl flex items-center justify-center text-xl" :class="getTypeDisplay(output.type).color">
       {{ getTypeDisplay(output.type).icon }}
     </div>
 
     <div class="flex-1 min-w-0">
-      <h4 class="m-0 text-[15px] font-semibold group-hover:text-[#e94560] transition-colors truncate">{{ output.title }}</h4>
+      <h4 class="m-0 text-[15px] font-semibold text-gray-900 dark:text-white/90 group-hover:text-indigo-500 transition-colors truncate">{{ output.title }}</h4>
       <div class="flex items-center gap-2 mt-1">
         <span class="text-xs font-medium px-1.5 py-0.5 rounded" :class="getTypeDisplay(output.type).color">
           {{ getTypeDisplay(output.type).label }}
         </span>
-        <span class="text-xs text-gray-400">{{ formatDate(output.activity_date) }}</span>
+        <span class="text-xs text-gray-400 dark:text-white/35">{{ formatDate(output.activity_date) }}</span>
       </div>
     </div>
 
-    <span class="shrink-0 text-gray-300 group-hover:text-[#e94560] transition-colors text-lg">→</span>
+    <span class="shrink-0 text-gray-300 dark:text-white/20 group-hover:text-indigo-500 transition-colors text-lg">→</span>
   </NuxtLink>
 </template>

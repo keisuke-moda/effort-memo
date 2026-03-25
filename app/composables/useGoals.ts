@@ -45,7 +45,7 @@ export function useGoals() {
       .from('milestones')
       .select('*')
       .eq('goal_id', goalId)
-      .order('created_at', { ascending: true })
+      .order('deadline', { ascending: true, nullsFirst: false })
     if (error) throw error
     return data as Milestone[]
   }
@@ -70,11 +70,15 @@ export function useGoals() {
     return data as Output
   }
 
-  const fetchGoalProgress = async (goalId: string): Promise<number> => {
+  const fetchGoalProgress = async (goalId: string): Promise<{ completed: number; inProgress: number }> => {
     const milestones = await fetchMilestonesByGoalId(goalId)
-    if (milestones.length === 0) return 0
+    if (milestones.length === 0) return { completed: 0, inProgress: 0 }
     const completed = milestones.filter((m) => m.status === 'completed').length
-    return Math.round((completed / milestones.length) * 100)
+    const inProgress = milestones.filter((m) => m.status === 'in_progress').length
+    return {
+      completed: Math.round((completed / milestones.length) * 100),
+      inProgress: Math.round((inProgress / milestones.length) * 100),
+    }
   }
 
   // --- Create ---

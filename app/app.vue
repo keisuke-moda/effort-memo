@@ -23,6 +23,14 @@ body {
   @apply bg-gray-50 text-gray-800 antialiased;
 }
 
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  @apply bg-[#0b0b12] text-white/85;
+}
+
 a {
   color: inherit;
 }

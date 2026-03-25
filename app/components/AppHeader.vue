@@ -3,31 +3,30 @@ const { isDark, toggleTheme } = useTheme()
 </script>
 
 <template>
-  <header class="sticky top-0 z-50 bg-white/90 dark:bg-black/40 backdrop-blur-xl border-b border-gray-200 dark:border-white/[0.08]">
+  <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0c0c18]/80 backdrop-blur-2xl border-b border-gray-200/60 dark:border-white/[0.06]">
     <div class="max-w-[1200px] mx-auto px-5 h-14 flex items-center justify-between">
       <NuxtLink to="/" class="flex items-center gap-2.5 no-underline group cursor-pointer">
-        <div class="w-8 h-8 rounded-lg bg-[#e94560] flex items-center justify-center shadow-[0_0_16px_rgba(233,69,96,0.4)]">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 transition-transform duration-200 group-hover:scale-110">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
           </svg>
         </div>
-        <span class="text-gray-900 dark:text-white text-[17px] font-semibold tracking-tight">effort-memo</span>
+        <span class="text-gray-900 dark:text-white text-[17px] font-bold tracking-tight">Momentum</span>
       </NuxtLink>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-1">
         <nav>
           <NuxtLink
             to="/"
-            class="text-gray-500 dark:text-white/50 no-underline text-sm px-3 py-1.5 rounded-lg transition-colors duration-150 hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 dark:focus-visible:ring-white/30"
+            class="text-gray-500 dark:text-white/50 no-underline text-sm px-3 py-1.5 rounded-lg transition-colors duration-150 hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50"
           >
             ダッシュボード
           </NuxtLink>
         </nav>
         <button
-          class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-500 dark:text-white/50 transition-colors duration-150 hover:text-gray-800 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-300 dark:focus-visible:ring-white/30 cursor-pointer"
+          class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 dark:text-white/40 transition-colors duration-150 hover:text-gray-700 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/50 cursor-pointer"
           :aria-label="isDark ? 'ライトモードに切り替え' : 'ダークモードに切り替え'"
           @click="toggleTheme"
         >
-          <!-- Sun icon (shown in dark mode to switch to light) -->
           <svg v-if="isDark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"/>
             <line x1="12" y1="1" x2="12" y2="3"/>
@@ -39,7 +38,6 @@ const { isDark, toggleTheme } = useTheme()
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
           </svg>
-          <!-- Moon icon (shown in light mode to switch to dark) -->
           <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
