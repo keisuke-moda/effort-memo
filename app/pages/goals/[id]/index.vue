@@ -38,7 +38,7 @@ async function handleMilestoneStatusChanged() {
     <div class="flex-1 min-w-0 flex flex-col gap-8">
       <!-- Goal Header -->
       <div class="flex flex-col gap-4 p-6 bg-white dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/[0.08] rounded-2xl">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-row flex-wrap items-center justify-between gap-3">
           <StatusBadge :status="goal.status" />
           <div class="flex items-center gap-2">
             <NuxtLink

@@ -4,7 +4,7 @@ const { isDark, toggleTheme } = useTheme()
 
 <template>
   <header class="sticky top-0 z-50 bg-white/80 dark:bg-[#0c0c18]/80 backdrop-blur-2xl border-b border-gray-200/60 dark:border-white/[0.06]">
-    <div class="max-w-[1200px] mx-auto px-5 h-14 flex items-center justify-between">
+    <div class="max-w-[1200px] mx-auto px-4 sm:px-5 h-14 flex items-center justify-between">
       <NuxtLink to="/" class="flex items-center gap-2.5 no-underline group cursor-pointer">
         <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center shadow-lg shadow-indigo-500/25 transition-transform duration-200 group-hover:scale-110">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">

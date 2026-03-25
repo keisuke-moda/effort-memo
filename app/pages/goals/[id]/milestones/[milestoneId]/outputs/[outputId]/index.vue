@@ -42,15 +42,26 @@ function getMediaType(url: string): 'image' | 'video' | 'audio' | null {
 <template>
   <div v-if="output && milestone && goal" class="flex flex-col gap-5 max-w-3xl mx-auto">
     <!-- Breadcrumb -->
-    <div class="flex items-center gap-1.5 text-sm text-gray-400 dark:text-white/35 flex-wrap">
-      <NuxtLink to="/" class="no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors">ダッシュボード</NuxtLink>
-      <span>/</span>
-      <NuxtLink :to="`/goals/${goalId}`" class="no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors">{{ goal.title }}</NuxtLink>
-      <span>/</span>
-      <NuxtLink :to="`/goals/${goalId}/milestones/${milestoneId}`" class="no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors">{{ milestone.title }}</NuxtLink>
-      <span>/</span>
-      <span class="text-gray-600 dark:text-white/60">{{ output.title }}</span>
-    </div>
+    <nav class="text-sm text-gray-400 dark:text-white/35 min-w-0">
+      <!-- Mobile: ← Parent title -->
+      <NuxtLink
+        :to="`/goals/${goalId}/milestones/${milestoneId}`"
+        class="sm:hidden inline-flex items-center gap-1.5 no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors min-w-0 max-w-full"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0"><polyline points="15 18 9 12 15 6"/></svg>
+        <span class="truncate font-medium text-gray-500 dark:text-white/45">{{ milestone.title }}</span>
+      </NuxtLink>
+      <!-- Desktop: full breadcrumb -->
+      <div class="hidden sm:flex items-center gap-1.5 flex-wrap">
+        <NuxtLink to="/" class="no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors shrink-0">ダッシュボード</NuxtLink>
+        <span class="shrink-0">/</span>
+        <NuxtLink :to="`/goals/${goalId}`" class="no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors">{{ goal.title }}</NuxtLink>
+        <span class="shrink-0">/</span>
+        <NuxtLink :to="`/goals/${goalId}/milestones/${milestoneId}`" class="no-underline text-gray-400 dark:text-white/35 hover:text-indigo-500 transition-colors">{{ milestone.title }}</NuxtLink>
+        <span class="shrink-0">/</span>
+        <span class="text-gray-600 dark:text-white/60">{{ output.title }}</span>
+      </div>
+    </nav>
 
     <!-- Header -->
     <div class="flex flex-col gap-4 p-6 bg-white dark:bg-white/[0.04] border border-gray-200/80 dark:border-white/[0.08] rounded-2xl">
