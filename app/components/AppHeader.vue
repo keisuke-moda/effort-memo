@@ -1,5 +1,21 @@
 <script setup lang="ts">
 const { isDark, toggleTheme } = useTheme()
+const supabase = useSupabaseClient()
+const user = useSupabaseUser()
+const router = useRouter()
+
+const signOut = async () => {
+  await supabase.auth.signOut()
+  router.push('/login')
+}
+
+const avatarUrl = computed(() => user.value?.user_metadata?.avatar_url ?? null)
+const displayName = computed(() => user.value?.user_metadata?.full_name ?? user.value?.email ?? '')
+const initials = computed(() => {
+  const name = displayName.value
+  if (!name) return '?'
+  return name.split(' ').map((n: string) => n[0]).join('').slice(0, 2).toUpperCase()
+})
 </script>
 
 <template>
@@ -42,6 +58,36 @@ const { isDark, toggleTheme } = useTheme()
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
         </button>
+
+        <!-- ユーザーメニュー -->
+        <div v-if="user" class="flex items-center gap-1 ml-1">
+          <div class="flex items-center gap-2 px-2 py-1 rounded-lg">
+            <img
+              v-if="avatarUrl"
+              :src="avatarUrl"
+              :alt="displayName"
+              class="w-6 h-6 rounded-full object-cover"
+            />
+            <div
+              v-else
+              class="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white text-[10px] font-bold"
+            >
+              {{ initials }}
+            </div>
+          </div>
+          <button
+            class="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 dark:text-white/40 transition-colors duration-150 hover:text-red-500 hover:bg-red-50 dark:hover:text-red-400 dark:hover:bg-red-500/10 cursor-pointer"
+            aria-label="ログアウト"
+            title="ログアウト"
+            @click="signOut"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </header>

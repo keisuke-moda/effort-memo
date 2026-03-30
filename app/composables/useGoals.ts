@@ -9,6 +9,7 @@ const nextStatus: Record<Status, Status> = {
 
 export function useGoals() {
   const client = useSupabaseClient<Database>()
+  const user = useSupabaseUser()
 
   // --- Read ---
   const fetchGoals = async (): Promise<Goal[]> => {
@@ -85,7 +86,7 @@ export function useGoals() {
   const addGoal = async (data: { title: string; description: string; deadline: string; reward: string }): Promise<Goal> => {
     const { data: goal, error } = await client
       .from('goals')
-      .insert(data)
+      .insert({ ...data, user_id: user.value?.id })
       .select()
       .single()
     if (error) throw error
