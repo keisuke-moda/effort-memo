@@ -16,7 +16,6 @@ export function useGoals() {
     const { data, error } = await client
       .from('goals')
       .select('*')
-      .eq('user_id', user.value?.id)
       .order('created_at', { ascending: false })
     if (error) throw error
     return data as Goal[]
